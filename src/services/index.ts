@@ -3,3 +3,5 @@ export * from './workspaceService';
 export * from './commandBuilderService';
 export * from './userInteractionService';
 export * from './executionService';
+export * from './commandService';
+export * from './extensionManagerWebviewService';

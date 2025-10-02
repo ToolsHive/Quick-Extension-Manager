@@ -9,7 +9,10 @@
     "disable plugin"
   ],
   "version": "1.0.0",
-  "repository": "https://github.com/ToolsHive/Quick-Extension-Manager.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ToolsHive/Quick-Extension-Manager.git"
+  },
   "icon": "resources/logo.png",
   "publisher": "ToolsHive",
   "engines": {

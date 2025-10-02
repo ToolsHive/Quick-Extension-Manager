@@ -4,7 +4,8 @@ import {
   WorkspaceService,
   CommandBuilderService,
   UserInteractionService,
-  ExecutionService
+  ExecutionService,
+  CommandService
 } from '../services';
 import { EXTENSION_CONSTANTS } from '../constants';
 
@@ -17,6 +18,7 @@ export class ExtensionManager {
   private commandBuilder: CommandBuilderService;
   private userInteraction: UserInteractionService;
   private executionService: ExecutionService;
+  private commandService: CommandService;
 
   constructor() {
     this.configService = new ConfigurationService();
@@ -24,6 +26,15 @@ export class ExtensionManager {
     this.commandBuilder = new CommandBuilderService();
     this.userInteraction = new UserInteractionService();
     this.executionService = new ExecutionService();
+    this.commandService = new CommandService();
+  }
+
+  /**
+   * Initialize the extension with all its commands
+   */
+  initialize(context: ExtensionContext): void {
+    this.commandService.registerCommands(context);
+    this.disableExtensions(context);
   }
 
   /**

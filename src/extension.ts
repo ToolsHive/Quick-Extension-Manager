@@ -10,7 +10,7 @@ export function activate(context: ExtensionContext) {
   console.log(EXTENSION_CONSTANTS.MESSAGES.EXTENSION_ACTIVE);
 
   const extensionManager = new ExtensionManager();
-  extensionManager.disableExtensions(context);
+  extensionManager.initialize(context);
 }
 
 /**

@@ -1,0 +1,62 @@
+/* Additional styles for Extension Manager Webview */
+
+/* This file can be used for additional custom styling */
+/* Most styles are embedded in the webview HTML for better performance */
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--vscode-scrollbarSlider-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--vscode-scrollbarSlider-hoverBackground);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--vscode-scrollbarSlider-activeBackground);
+}
+
+/* Animation for smooth transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.extension-card {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Focus styles for accessibility */
+.button:focus,
+.search-input:focus,
+.toggle-switch input:focus + .toggle-slider {
+    outline: 2px solid var(--vscode-focusBorder);
+    outline-offset: 2px;
+}
+
+/* Enhanced icon styling */
+.extension-icon-image {
+    transition: transform 0.2s ease;
+}
+
+.extension-card:hover .extension-icon-image {
+    transform: scale(1.05);
+}
+
+/* Icon styling improvements */
+.extension-icon-image {
+    background: transparent !important;
+}
+
+/* Fallback icon styling */
+.extension-icon-fallback {
+    background: linear-gradient(135deg, var(--vscode-button-background), var(--vscode-button-hoverBackground)) !important;
+    color: var(--vscode-button-foreground);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
