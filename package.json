@@ -1,12 +1,17 @@
 {
-  "name": "vscode-disable-extensions",
-  "displayName": "Disable Extensions",
-  "description": "Disable extensions from config file",
-	"keywords": [ "disable", "extension", "disable extension","disable plugin" ],
-  "version": "0.1.2",
-  "repository": "https://github.com/muzaisimao/vscode-disable-extensions",
+  "name": "vscode-quick-extension-manager",
+  "displayName": "Quick Extension Manager",
+  "description": "Quickly enable/disable VS Code extensions per workspace for better performance and focus.",
+  "keywords": [
+    "disable",
+    "extension",
+    "disable extension",
+    "disable plugin"
+  ],
+  "version": "1.0.0",
+  "repository": "https://github.com/ToolsHive/Quick-Extension-Manager.git",
   "icon": "resources/logo.png",
-  "publisher": "muzaisimao",
+  "publisher": "ToolsHive",
   "engines": {
     "vscode": "^1.58.0"
   },
@@ -18,7 +23,36 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": []
+    "commands": [
+      {
+        "command": "quickExtensionManager.enable",
+        "title": "Enable Quick Extension Manager"
+      },
+      {
+        "command": "quickExtensionManager.disable",
+        "title": "Disable Quick Extension Manager"
+      },
+      {
+        "command": "quickExtensionManager.update",
+        "title": "Quick Extension Manager: Update Extension"
+      },
+      {
+        "command": "quickExtensionManager.github",
+        "title": "Quick Extension Manager: Open GitHub Repository"
+      },
+      {
+        "command": "quickExtensionManager.settings",
+        "title": "Quick Extension Manager: Open Settings"
+      },
+      {
+        "command": "quickExtensionManager.report",
+        "title": "Quick Extension Manager: Report Issue"
+      },
+      {
+        "command": "quickExtensionManager.manage",
+        "title": "Quick Extension Manager: Manage Extensions"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "rimraf out && npm run -S esbuild:base -- --minify",
@@ -38,10 +72,10 @@
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
     "@vscode/test-electron": "^1.6.2",
-    "esbuild": "^0.14.1",
+    "esbuild": "^0.25.10",
     "eslint": "^8.3.0",
     "glob": "^7.2.0",
-    "mocha": "^9.1.3",
+    "mocha": "^11.7.4",
     "typescript": "^4.5.2"
   }
 }
