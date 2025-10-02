@@ -5,9 +5,14 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v1.0.0)'
+        required: true
+        type: string
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -16,6 +21,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Show current tags
+      if: github.event_name == 'workflow_dispatch'
+      run: |
+        echo "Current tags in repository:"
+        git tag --sort=-version:refname | head -10 || echo "No tags found"
+        echo "Creating release for version: ${{ github.event.inputs.version }}"
 
     - uses: actions/setup-node@v4
       with:
@@ -33,9 +47,22 @@ jobs:
     - name: Package extension
       run: vsce package
 
+    - name: Get release version
+      id: version
+      run: |
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+        else
+          echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        fi
+
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
+        tag_name: ${{ steps.version.outputs.version }}
+        name: Quick Extension Manager ${{ steps.version.outputs.version }}
         files: '*.vsix'
+        draft: false
+        prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
