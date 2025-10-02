@@ -1,0 +1,41 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+
+    - name: Clean install
+      run: |
+        rm -f package-lock.json
+        npm install
+        npm install -g @vscode/vsce
+
+    - name: Build extension
+      run: npm run build
+
+    - name: Package extension
+      run: vsce package
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: '*.vsix'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
